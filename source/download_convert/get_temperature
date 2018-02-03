@@ -1,0 +1,6 @@
+#!/bin/bash
+# download 1 degree gfs 2m temperature forecast from nomads and convert to json
+YYYYMMDD=20180131
+curl "http://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_1p00.pl?file=gfs.t00z.pgrb2.1p00.f000&lev_2_m_above_ground=on&var_TMP=on&leftlon=0&rightlon=360&toplat=90&bottomlat=-90&dir=%2Fgfs.${YYYYMMDD}00" -o data/gfs/gfs.t00z.pgrb2.1p00.f000
+grib2json -d -n -o data/gfs/json/tas-2m-gfs-1.0.json data/gfs/gfs.t00z.pgrb2.1p00.f000
+rm data/gfs/gfs.t00z.pgrb2.1p00.f000
